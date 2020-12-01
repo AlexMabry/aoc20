@@ -1,5 +1,3 @@
-import math
-
 numbers = [int(n) for n in open('d1in.txt').read().splitlines()]
 
 numberSet = {n for n in numbers}
