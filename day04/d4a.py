@@ -1,6 +1,9 @@
+REQUIRED = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+
+
 def get_passports(filename):
     result = []
-    rows = [n.strip() for n in open('d4in.txt').read().splitlines()]
+    rows = [n.strip() for n in open(filename).read().splitlines()]
 
     cur = 0
     for row in rows:
@@ -16,12 +19,12 @@ def get_passports(filename):
 
     return result
 
-passports = get_passports('d4in.txt')
-required = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
-valid = 0
-for p in passports:
-    if all([key in p for key in required]):
-        valid += 1
 
-print(valid)
+def is_valid(passport):
+    return all([key in passport for key in REQUIRED])
 
+
+if __name__ == '__main__':
+    passports = get_passports('d4in.txt')
+    valid = sum([is_valid(p) for p in passports])
+    print(valid)
